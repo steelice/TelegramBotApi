@@ -1,5 +1,5 @@
 {
-    "name": "telegram-bot/api",
+    "name": "steelice/telegrambotapi",
     "description": "PHP Wrapper for Telegram Bot API",
     "keywords": [
         "php",
@@ -7,18 +7,12 @@
         "bot",
         "bot api"
     ],
-    "homepage": "https://github.com/TelegramBot/Api",
+    "homepage": "https://github.com/steelice/TelegramBotApi",
     "license": "MIT",
     "authors": [
-        {
-            "name": "Ilya Gusev",
-            "email": "mail@igusev.ru",
-            "homepage": "https://php-cat.com",
-            "role": "Developer"
-        }
     ],
     "require": {
-        "php" : ">=5.5.0",
+        "php" : ">=7.4.0",
         "ext-curl": "*"
     },
     "require-dev": {

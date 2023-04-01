@@ -9,6 +9,7 @@ use TelegramBot\Api\Types\ArrayOfMessages;
 use TelegramBot\Api\Types\ArrayOfSticker;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\BotCommand;
+use TelegramBot\Api\Types\BotCommandScope\BotCommandScopeDefault;
 use TelegramBot\Api\Types\Chat;
 use TelegramBot\Api\Types\ChatMember;
 use TelegramBot\Api\Types\File;
@@ -1432,12 +1433,14 @@ class BotApi
      * @throws HttpException
      * @throws InvalidJsonException
      */
-    public function setMyCommands($commands)
+    public function setMyCommands(array $commands, ?BotCommandScopeDefault $scope = null, $languageCode = null)
     {
         return $this->call(
             'setMyCommands',
             [
-                'commands' => json_encode($commands)
+                'commands' => json_encode($commands),
+                'scope' => $scope ? $scope->toJson() : null,
+                'language_code' => $languageCode,
             ]
         );
     }

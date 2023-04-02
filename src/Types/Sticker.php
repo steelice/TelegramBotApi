@@ -291,9 +291,9 @@ class Sticker extends BaseType implements TypeInterface
     }
 
     /**
-     * @param File $premiumAnimation
+     * @param File|array $premiumAnimation
      */
-    public function setPremiumAnimation(File $premiumAnimation)
+    public function setPremiumAnimation($premiumAnimation)
     {
         $this->premiumAnimation = $premiumAnimation;
     }

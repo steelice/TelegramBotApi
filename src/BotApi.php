@@ -1706,6 +1706,8 @@ class BotApi
         $startParameter,
         $currency,
         $prices,
+        ?int $maxTipAmount = null,
+        ?array $tips = null,
         $isFlexible = false,
         $photoUrl = null,
         $photoSize = null,
@@ -1723,7 +1725,7 @@ class BotApi
         $sendPhoneNumberToProvider = false,
         $sendEmailToProvider = false
     ) {
-        return Message::fromResponse($this->call('sendInvoice', [
+        $data = [
             'chat_id' => $chatId,
             'title' => $title,
             'description' => $description,
@@ -1747,7 +1749,17 @@ class BotApi
             'provider_data' => $providerData,
             'send_phone_number_to_provider' => (bool)$sendPhoneNumberToProvider,
             'send_email_to_provider' => (bool)$sendEmailToProvider
-        ]));
+        ];
+
+        if ($maxTipAmount) {
+            $data['max_tip_amount'] = $maxTipAmount;
+        }
+
+        if ($tips) {
+            $data['suggested_tip_amounts'] = json_encode($tips);
+        }
+
+        return Message::fromResponse($this->call('sendInvoice', $data));
     }
 
     /**

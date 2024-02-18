@@ -19,20 +19,20 @@ class Video extends BaseType implements TypeInterface
      *
      * @var array
      */
-    static protected $requiredParams = ['file_id', 'file_unique_id', 'width', 'height', 'duration'];
+    protected static $requiredParams = ['file_id', 'file_unique_id', 'width', 'height', 'duration'];
 
     /**
      * {@inheritdoc}
      *
      * @var array
      */
-    static protected $map = [
+    protected static $map = [
         'file_id' => true,
         'file_unique_id' => true,
         'width' => true,
         'height' => true,
         'duration' => true,
-        'thumb' => PhotoSize::class,
+        'thumbnail' => PhotoSize::class,
         'mime_type' => true,
         'file_size' => true
     ];
@@ -68,22 +68,21 @@ class Video extends BaseType implements TypeInterface
     /**
      * Video thumbnail
      *
-     * @var PhotoSize
+     * @var PhotoSize|null
      */
-    protected $thumb;
-
+    protected $thumbnail;
 
     /**
      * Optional. Mime type of a file as defined by sender
      *
-     * @var string
+     * @var string|null
      */
     protected $mimeType;
 
     /**
      * Optional. File size
      *
-     * @var int
+     * @var int|null
      */
     protected $fileSize;
 
@@ -103,9 +102,11 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $duration
+     * @param mixed $duration
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setDuration($duration)
     {
@@ -126,6 +127,8 @@ class Video extends BaseType implements TypeInterface
 
     /**
      * @param string $fileId
+     *
+     * @return void
      */
     public function setFileId($fileId)
     {
@@ -133,7 +136,7 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getFileSize()
     {
@@ -141,9 +144,11 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $fileSize
+     * @param mixed $fileSize
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setFileSize($fileSize)
     {
@@ -163,9 +168,11 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $height
+     * @param mixed $height
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setHeight($height)
     {
@@ -177,7 +184,7 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @return string
+     * @return null|string
      */
     public function getMimeType()
     {
@@ -186,6 +193,8 @@ class Video extends BaseType implements TypeInterface
 
     /**
      * @param string $mimeType
+     *
+     * @return void
      */
     public function setMimeType($mimeType)
     {
@@ -193,19 +202,43 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @return PhotoSize
+     * @return PhotoSize|null
      */
-    public function getThumb()
+    public function getThumbnail()
     {
-        return $this->thumb;
+        return $this->thumbnail;
     }
 
     /**
-     * @param PhotoSize $thumb
+     * @param PhotoSize|null $thumbnail
+     *
+     * @return void
      */
-    public function setThumb(PhotoSize $thumb)
+    public function setThumbnail($thumbnail)
     {
-        $this->thumb = $thumb;
+        $this->thumbnail = $thumbnail;
+    }
+
+    /**
+     * @deprecated use getThumbnail method
+     *
+     * @return PhotoSize|null
+     */
+    public function getThumb()
+    {
+        return $this->getThumbnail();
+    }
+
+    /**
+     * @deprecated use setThumbnail method
+     *
+     * @param PhotoSize|null $thumb
+     *
+     * @return void
+     */
+    public function setThumb($thumb)
+    {
+        $this->setThumbnail($thumb);
     }
 
     /**
@@ -217,9 +250,11 @@ class Video extends BaseType implements TypeInterface
     }
 
     /**
-     * @param int $width
+     * @param mixed $width
      *
      * @throws InvalidArgumentException
+     *
+     * @return void
      */
     public function setWidth($width)
     {
@@ -240,6 +275,8 @@ class Video extends BaseType implements TypeInterface
 
     /**
      * @param string $fileUniqueId
+     *
+     * @return void
      */
     public function setFileUniqueId($fileUniqueId)
     {

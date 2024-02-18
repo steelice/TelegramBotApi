@@ -2,11 +2,13 @@
 
 namespace TelegramBot\Api\Test;
 
+use PHPUnit\Framework\TestCase;
 use TelegramBot\Api\BotApi;
+use TelegramBot\Api\Http\HttpClientInterface;
 use TelegramBot\Api\Types\ArrayOfUpdates;
 use TelegramBot\Api\Types\Update;
 
-class BotApiTest extends \PHPUnit_Framework_TestCase
+class BotApiTest extends TestCase
 {
     public function data()
     {
@@ -107,24 +109,40 @@ class BotApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetUpdates($updates)
     {
-        $mock = $this->getMockBuilder('\TelegramBot\Api\BotApi')
-            ->setMethods(['call'])
-            ->enableOriginalConstructor()
-            ->setConstructorArgs(['testToken'])
-            ->getMock();
+        $httpClient = $this->createHttpClient();
+        $botApi = $this->createBotApi($httpClient);
 
-        $mock->expects($this->once())->method('call')->willReturn($updates);
+        $httpClient
+            ->expects($this->once())
+            ->method('request')
+            ->willReturn($updates)
+        ;
 
+        $result = $botApi->getUpdates();
 
         $expectedResult = ArrayOfUpdates::fromResponse($updates);
-        $result = $mock->getUpdates();
 
-        $this->assertInternalType('array', $result);
         $this->assertEquals($expectedResult, $result);
 
         foreach($result as $key => $item) {
-            $this->assertInstanceOf('\TelegramBot\Api\Types\Update', $item);
+            $this->assertInstanceOf(Update::class, $item);
             $this->assertEquals($expectedResult[$key], $item);
         }
+    }
+
+    /**
+     * @return HttpClientInterface&\PHPUnit\Framework\MockObject\MockObject
+     */
+    private function createHttpClient()
+    {
+        /** @var HttpClientInterface $httpClient */
+        $httpClient = $this->createMock(HttpClientInterface::class);
+
+        return $httpClient;
+    }
+
+    private function createBotApi(HttpClientInterface $httpClient)
+    {
+        return new BotApi('token', null, $httpClient);
     }
 }

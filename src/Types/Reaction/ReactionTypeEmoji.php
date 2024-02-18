@@ -9,6 +9,7 @@ class ReactionTypeEmoji extends BaseType
     protected static $requiredParams = ['emoji'];
 
     protected static $map = [
+        'type' => true,
         'emoji' => true,
     ];
 

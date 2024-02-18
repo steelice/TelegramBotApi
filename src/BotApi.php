@@ -21,6 +21,7 @@ use TelegramBot\Api\Types\InputMedia\InputMedia;
 use TelegramBot\Api\Types\MaskPosition;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Poll;
+use TelegramBot\Api\Types\Reaction\ReactionTypeEmoji;
 use TelegramBot\Api\Types\ReplyKeyboardHide;
 use TelegramBot\Api\Types\ReplyKeyboardMarkup;
 use TelegramBot\Api\Types\ReplyKeyboardRemove;
@@ -464,6 +465,38 @@ class BotApi
             'chat_id' => $chatId,
             'action' => $action,
         ]);
+    }
+
+    /**
+     * Use this method to change the chosen reactions on a message. Service messages can't be reacted to.
+     * Automatically forwarded messages from a channel to its discussion group have the same available reactions as
+     * messages in the channel. Returns True on success.
+     *
+     * @param $chatId
+     * @param $messageId
+     * @param ReactionTypeEmoji[]|null $reaction
+     * @param bool|null $isBig
+     * @return mixed
+     * @throws Exception
+     * @throws HttpException
+     * @throws InvalidJsonException
+     */
+    public function setMessageReaction($chatId, $messageId, ?array $reaction = null, ?bool $isBig = null)
+    {
+        $data = [
+            'chat_id'    => $chatId,
+            'message_id' => $messageId,
+        ];
+
+        if ($reaction) {
+            $data['reaction'] = array_map(fn($reaction) => $reaction->toJson(), $reaction);
+        }
+
+        if ($isBig) {
+            $data['is_big'] = $isBig;
+        }
+
+        return $this->call('setMessageReaction', $data);
     }
 
     /**

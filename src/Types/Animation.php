@@ -46,13 +46,6 @@ class Animation extends BaseType implements TypeInterface
     protected $fileId;
 
     /**
-     * Unique identifier for this file, which is supposed to be the same over time and for different bots. Can't be used to download or reuse the file.
-     *
-     * @var string
-     */
-    protected $fileUniqueId;
-
-    /**
      * Video width as defined by sender
      *
      * @var int
@@ -301,21 +294,5 @@ class Animation extends BaseType implements TypeInterface
         } else {
             throw new InvalidArgumentException();
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getFileUniqueId()
-    {
-        return $this->fileUniqueId;
-    }
-
-    /**
-     * @param string $fileUniqueId
-     */
-    public function setFileUniqueId($fileUniqueId)
-    {
-        $this->fileUniqueId = $fileUniqueId;
     }
 }

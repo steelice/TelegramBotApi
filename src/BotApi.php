@@ -3051,12 +3051,20 @@ class BotApi
      */
     public function setMessageReaction($chatId, $messageId, $reaction, $isBig = false)
     {
-        return $this->call('setMessageReaction', [
-            'chat_id' => $chatId,
+        $data = [
+            'chat_id'    => $chatId,
             'message_id' => $messageId,
-            'reaction' => $reaction,
-            'is_big' => $isBig
-        ]);
+        ];
+
+        if ($reaction) {
+            $data['reaction'] = array_map(fn($reaction) => $reaction->toJson(), $reaction);
+        }
+
+        if ($isBig) {
+            $data['is_big'] = $isBig;
+        }
+
+        return $this->call('setMessageReaction', $data);
     }
 
     /**

@@ -3057,7 +3057,7 @@ class BotApi
         ];
 
         if ($reaction) {
-            $data['reaction'] = json_encode(array_map(fn($reaction) => $reaction->toJson(), $reaction));
+            $data['reaction'] = json_encode(array_map(fn($reaction) => json_decode($reaction->toJson(), true), $reaction));
         }
 
         if ($isBig) {

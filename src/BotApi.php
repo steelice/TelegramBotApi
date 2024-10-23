@@ -277,6 +277,11 @@ class BotApi
         return $this->httpClient->download($this->fileEndpoint . '/' . $path);
     }
 
+    public function getFileUrl(): string
+    {
+        return $this->fileEndpoint;
+    }
+
     /**
      * @deprecated
      *

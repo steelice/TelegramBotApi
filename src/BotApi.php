@@ -900,7 +900,7 @@ class BotApi
         $replyMarkup = null,
         $disableNotification = false,
         $protectContent = false,
-        $allowSendingWithoutReply = false,
+        $allowSendingWithoutReply = null,
         $messageThreadId = null,
         $replyParameters = null
     ) {

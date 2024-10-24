@@ -1767,4 +1767,44 @@ class Message extends BaseType implements TypeInterface
     {
         $this->forumTopicReopened = $forumTopicReopened;
     }
+
+    public function getVideoChatScheduled(): ?VideoChatScheduled
+    {
+        return $this->videoChatScheduled;
+    }
+
+    public function setVideoChatScheduled(?VideoChatScheduled $videoChatScheduled): void
+    {
+        $this->videoChatScheduled = $videoChatScheduled;
+    }
+
+    public function getVideoChatStarted(): ?VideoChatStarted
+    {
+        return $this->videoChatStarted;
+    }
+
+    public function setVideoChatStarted(?VideoChatStarted $videoChatStarted): void
+    {
+        $this->videoChatStarted = $videoChatStarted;
+    }
+
+    public function getVideoChatEnded(): ?VideoChatEnded
+    {
+        return $this->videoChatEnded;
+    }
+
+    public function setVideoChatEnded(?VideoChatEnded $videoChatEnded): void
+    {
+        $this->videoChatEnded = $videoChatEnded;
+    }
+
+    public function getVideoChatParticipantsInvited(): ?VideoChatParticipantsInvited
+    {
+        return $this->videoChatParticipantsInvited;
+    }
+
+    public function setVideoChatParticipantsInvited(?VideoChatParticipantsInvited $videoChatParticipantsInvited): void
+    {
+        $this->videoChatParticipantsInvited = $videoChatParticipantsInvited;
+    }
 }

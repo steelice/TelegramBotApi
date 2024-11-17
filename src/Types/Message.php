@@ -1807,4 +1807,146 @@ class Message extends BaseType implements TypeInterface
     {
         $this->videoChatParticipantsInvited = $videoChatParticipantsInvited;
     }
+
+    public function getMessageAutoDeleteTimerChanged(): ?MessageAutoDeleteTimerChanged
+    {
+        return $this->messageAutoDeleteTimerChanged;
+    }
+
+    public function setMessageAutoDeleteTimerChanged(?MessageAutoDeleteTimerChanged $messageAutoDeleteTimerChanged): void
+    {
+        $this->messageAutoDeleteTimerChanged = $messageAutoDeleteTimerChanged;
+    }
+
+    public function getChatBackgroundSet(): ?ChatBackground
+    {
+        return $this->chatBackgroundSet;
+    }
+
+    public function setChatBackgroundSet(?ChatBackground $chatBackgroundSet): void
+    {
+        $this->chatBackgroundSet = $chatBackgroundSet;
+    }
+
+    public function getForumTopicEdited(): ?ForumTopicEdited
+    {
+        return $this->forumTopicEdited;
+    }
+
+    public function setForumTopicEdited(?ForumTopicEdited $forumTopicEdited): void
+    {
+        $this->forumTopicEdited = $forumTopicEdited;
+    }
+
+    public function getGeneralForumTopicHidden(): ?GeneralForumTopicHidden
+    {
+        return $this->generalForumTopicHidden;
+    }
+
+    public function setGeneralForumTopicHidden(?GeneralForumTopicHidden $generalForumTopicHidden): void
+    {
+        $this->generalForumTopicHidden = $generalForumTopicHidden;
+    }
+
+    public function getGeneralForumTopicUnhidden(): ?GeneralForumTopicUnhidden
+    {
+        return $this->generalForumTopicUnhidden;
+    }
+
+    public function setGeneralForumTopicUnhidden(?GeneralForumTopicUnhidden $generalForumTopicUnhidden): void
+    {
+        $this->generalForumTopicUnhidden = $generalForumTopicUnhidden;
+    }
+
+    public function getGiveawayCreated(): ?GiveawayCreated
+    {
+        return $this->giveawayCreated;
+    }
+
+    public function setGiveawayCreated(?GiveawayCreated $giveawayCreated): void
+    {
+        $this->giveawayCreated = $giveawayCreated;
+    }
+
+    public function getGiveawayCompleted(): ?GiveawayCompleted
+    {
+        return $this->giveawayCompleted;
+    }
+
+    public function setGiveawayCompleted(?GiveawayCompleted $giveawayCompleted): void
+    {
+        $this->giveawayCompleted = $giveawayCompleted;
+    }
+
+    public function getGiveaway(): ?Giveaway
+    {
+        return $this->giveaway;
+    }
+
+    public function setGiveaway(?Giveaway $giveaway): void
+    {
+        $this->giveaway = $giveaway;
+    }
+
+    public function getGiveawayWinners(): ?GiveawayWinners
+    {
+        return $this->giveawayWinners;
+    }
+
+    public function setGiveawayWinners(?GiveawayWinners $giveawayWinners): void
+    {
+        $this->giveawayWinners = $giveawayWinners;
+    }
+
+    public function getBoostAdded(): ?ChatBoostAdded
+    {
+        return $this->boostAdded;
+    }
+
+    public function setBoostAdded(?ChatBoostAdded $boostAdded): void
+    {
+        $this->boostAdded = $boostAdded;
+    }
+
+    public function getProximityAlertTriggered(): ?ProximityAlertTriggered
+    {
+        return $this->proximityAlertTriggered;
+    }
+
+    public function setProximityAlertTriggered(?ProximityAlertTriggered $proximityAlertTriggered): void
+    {
+        $this->proximityAlertTriggered = $proximityAlertTriggered;
+    }
+
+    public function getWriteAccessAllowed(): ?WriteAccessAllowed
+    {
+        return $this->writeAccessAllowed;
+    }
+
+    public function setWriteAccessAllowed(?WriteAccessAllowed $writeAccessAllowed): void
+    {
+        $this->writeAccessAllowed = $writeAccessAllowed;
+    }
+
+    public function getChatShared(): ?ChatShared
+    {
+        return $this->chatShared;
+    }
+
+    public function setChatShared(?ChatShared $chatShared): void
+    {
+        $this->chatShared = $chatShared;
+    }
+
+    public function getUsersShared(): ?UsersShared
+    {
+        return $this->usersShared;
+    }
+
+    public function setUsersShared(?UsersShared $usersShared): void
+    {
+        $this->usersShared = $usersShared;
+    }
+
+
 }

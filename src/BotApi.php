@@ -1183,7 +1183,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $thumbnail = null,
-        $replyParameters = null
+        $replyParameters = null,
+        bool $hasSpoiler = false,
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1210,7 +1211,8 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'thumbnail' => $thumbnail,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'has_spoiler' => $hasSpoiler,
         ]));
     }
 
@@ -1250,7 +1252,8 @@ class BotApi
         $protectContent = null,
         $allowSendingWithoutReply = null,
         $thumbnail = null,
-        $replyParameters = null
+        $replyParameters = null,
+        bool $hasSpoiler = false,
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1276,7 +1279,8 @@ class BotApi
             'parse_mode' => $parseMode,
             'protect_content' => (bool) $protectContent,
             'thumbnail' => $thumbnail,
-            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
+            'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson(),
+            'has_spoiler' => $hasSpoiler,
         ]));
     }
 
@@ -1488,7 +1492,8 @@ class BotApi
         $messageThreadId = null,
         $protectContent = null,
         $allowSendingWithoutReply = null,
-        $replyParameters = null
+        $replyParameters = null,
+        ?bool $hasSpoiler = null,
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1503,17 +1508,23 @@ class BotApi
             ]);
         }
 
-        return Message::fromResponse($this->call('sendPhoto', [
+        $data = [
             'chat_id' => $chatId,
             'photo' => $photo,
             'caption' => $caption,
             'message_thread_id' => $messageThreadId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification,
+            'disable_notification' => (bool)$disableNotification,
             'parse_mode' => $parseMode,
-            'protect_content' => (bool) $protectContent,
+            'protect_content' => (bool)$protectContent,
             'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
-        ]));
+        ];
+
+        if ($hasSpoiler !== null) {
+            $data['has_spoiler'] = $hasSpoiler;
+        }
+
+        return Message::fromResponse($this->call('sendPhoto', $data));
     }
 
     /**

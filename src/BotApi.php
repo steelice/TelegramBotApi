@@ -430,11 +430,11 @@ class BotApi
         $captionEntities = null,
         $disableNotification = false,
         $replyToMessageId = null,
-        $allowSendingWithoutReply = false,
+        $allowSendingWithoutReply = null,
         $replyMarkup = null,
         $messageThreadId = null,
         $protectContent = null,
-        $replyParameters = null
+        $replyParameters = null,
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(

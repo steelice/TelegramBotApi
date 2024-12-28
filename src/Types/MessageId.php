@@ -3,6 +3,7 @@
 namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\InvalidArgumentException;
+use TelegramBot\Api\BaseType;
 
 /**
  * Class MessageId
@@ -10,7 +11,7 @@ use TelegramBot\Api\InvalidArgumentException;
  *
  * @package TelegramBot\Api\Types
  */
-class MessageId extends MaybeInaccessibleMessage
+class MessageId extends BaseType
 {
     /**
      * {@inheritdoc}

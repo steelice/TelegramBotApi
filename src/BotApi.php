@@ -2045,7 +2045,9 @@ class BotApi
         $messageThreadId = null,
         $protectContent = null,
         $allowSendingWithoutReply = null,
-        $replyParameters = null
+        $replyParameters = null,
+        $maxTipAmount = null,
+        $suggestedTipAmounts = null,
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -2060,7 +2062,7 @@ class BotApi
             ]);
         }
 
-        return Message::fromResponse($this->call('sendInvoice', [
+        $data = [
             'chat_id' => $chatId,
             'title' => $title,
             'description' => $description,
@@ -2080,13 +2082,22 @@ class BotApi
             'need_shipping_address' => $needShippingAddress,
             'message_thread_id' => $messageThreadId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'disable_notification' => (bool) $disableNotification,
+            'disable_notification' => (bool)$disableNotification,
             'provider_data' => $providerData,
-            'send_phone_number_to_provider' => (bool) $sendPhoneNumberToProvider,
-            'send_email_to_provider' => (bool) $sendEmailToProvider,
-            'protect_content' => (bool) $protectContent,
+            'send_phone_number_to_provider' => (bool)$sendPhoneNumberToProvider,
+            'send_email_to_provider' => (bool)$sendEmailToProvider,
+            'protect_content' => (bool)$protectContent,
             'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
-        ]));
+        ];
+
+        if ($maxTipAmount !== null) {
+            $data['max_tip_amount'] = $maxTipAmount;
+        }
+        if ($suggestedTipAmounts !== null) {
+            $data['suggested_tip_amounts'] = json_encode($suggestedTipAmounts);
+        }
+
+        return Message::fromResponse($this->call('sendInvoice', $data));
     }
 
     /**

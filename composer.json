@@ -1,5 +1,5 @@
 {
-    "name": "telegram-bot/api",
+    "name": "steelice/TelegramBotApi",
     "description": "PHP Wrapper for Telegram Bot API",
     "keywords": [
         "php",
@@ -7,7 +7,7 @@
         "bot",
         "bot api"
     ],
-    "homepage": "https://github.com/TelegramBot/Api",
+    "homepage": "https://github.com/steelice/TelegramBotApi",
     "license": "MIT",
     "authors": [
         {

@@ -50,6 +50,7 @@ class Update extends BaseType implements TypeInterface
         'message_reaction_count' => MessageReactionCountUpdated::class,
         'chat_boost' => ChatBoostUpdated::class,
         'chat_boost_removed' => ChatBoostRemoved::class,
+        'new_chat_photo' => true,
     ];
 
     /**
@@ -197,6 +198,8 @@ class Update extends BaseType implements TypeInterface
      * @var ChatBoostRemoved|null
      */
     protected $chatBoostRemoved;
+
+    protected ?array $newChatPhoto = null;
 
     /**
      * @return int
@@ -539,5 +542,18 @@ class Update extends BaseType implements TypeInterface
     public function setChatBoostRemoved($chatBoostRemoved)
     {
         $this->chatBoostRemoved = $chatBoostRemoved;
+    }
+
+
+    public function getNewChatPhoto(): ?array
+    {
+        return $this->newChatPhoto;
+    }
+
+    public function setNewChatPhoto($newChatPhoto)
+    {
+        $this->newChatPhoto = $newChatPhoto;
+
+        return $this;
     }
 }

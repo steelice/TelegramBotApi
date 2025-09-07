@@ -4,6 +4,7 @@ namespace TelegramBot\Api\Types;
 
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
+use TelegramBot\Api\InvalidArgumentException;
 
 /**
  * Class BackgroundType
@@ -13,6 +14,12 @@ use TelegramBot\Api\TypeInterface;
  */
 abstract class BackgroundType extends BaseType implements TypeInterface
 {
+    protected static $requiredParams = ['type'];
+
+    protected static $map = [
+        'type' => true,
+    ];
+
     /**
      * Type of the background
      *
@@ -35,5 +42,15 @@ abstract class BackgroundType extends BaseType implements TypeInterface
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    public static function fromResponse($data)
+    {
+        self::validate($data);
+        /** @psalm-suppress UnsafeInstantiation */
+        $instance = new static();
+        $instance->map($data);
+
+        return $instance;
     }
 }

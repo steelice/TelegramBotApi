@@ -449,19 +449,24 @@ class BotApi
             ]);
         }
 
-        return MessageId::fromResponse($this->call('copyMessage', [
+        $data = [
             'chat_id' => $chatId,
             'from_chat_id' => $fromChatId,
-            'message_id' => (int) $messageId,
-            'caption' => $caption,
+            'message_id' => (int)$messageId,
             'parse_mode' => $parseMode,
             'caption_entities' => $captionEntities,
-            'disable_notification' => (bool) $disableNotification,
+            'disable_notification' => (bool)$disableNotification,
             'message_thread_id' => $messageThreadId,
             'reply_markup' => is_null($replyMarkup) ? $replyMarkup : $replyMarkup->toJson(),
-            'protect_content' => (bool) $protectContent,
+            'protect_content' => (bool)$protectContent,
             'reply_parameters' => is_null($replyParameters) ? $replyParameters : $replyParameters->toJson()
-        ]));
+        ];
+
+        if ($caption !== null) {
+            $data['caption'] = $caption;
+        }
+
+        return MessageId::fromResponse($this->call('copyMessage', $data));
     }
 
     /**

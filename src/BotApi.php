@@ -1499,6 +1499,7 @@ class BotApi
         $allowSendingWithoutReply = null,
         $replyParameters = null,
         ?bool $hasSpoiler = null,
+        ?bool $showCaptionAboveMedia = null,
     ) {
         if (null !== $replyToMessageId || null !== $allowSendingWithoutReply) {
             @trigger_error(
@@ -1527,6 +1528,10 @@ class BotApi
 
         if ($hasSpoiler !== null) {
             $data['has_spoiler'] = $hasSpoiler;
+        }
+
+        if ($showCaptionAboveMedia !== null) {
+            $data['show_caption_above_media'] = $showCaptionAboveMedia;
         }
 
         return Message::fromResponse($this->call('sendPhoto', $data));

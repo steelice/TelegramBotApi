@@ -176,7 +176,7 @@ class BotApi
      * @param HttpClientInterface|null $httpClient
      * @param string|null $endpoint
      */
-    public function __construct($token, HttpClientInterface $httpClient = null, $endpoint = null)
+    public function __construct($token, ?HttpClientInterface $httpClient = null, $endpoint = null)
     {
         $this->token = $token;
         $this->endpoint = ($endpoint ?: self::URL_PREFIX) . $token;
@@ -243,7 +243,7 @@ class BotApi
      * @throws HttpException
      * @throws InvalidJsonException
      */
-    public function call($method, array $data = null, $timeout = null)
+    public function call($method, ?array $data = null, $timeout = null)
     {
         if ($timeout !== null) {
             @trigger_error(sprintf('Passing $timeout parameter in %s::%s is deprecated. Use http client options', __CLASS__, __METHOD__), \E_USER_DEPRECATED);

@@ -5,12 +5,13 @@ namespace TelegramBot\Api\Types\Inline;
 use TelegramBot\Api\BaseType;
 use TelegramBot\Api\TypeInterface;
 use TelegramBot\Api\Types\CallbackGame;
+use TelegramBot\Api\Types\CopyTextButton;
 use TelegramBot\Api\Types\LoginUrl;
 use TelegramBot\Api\Types\WebAppInfo;
 
 /**
  * Class InlineKeyboardButton
- * This object represents one button of an inline keyboard. Exactly one of the optional fields must be used to specify type of the button.
+ * This object represents one button of an inline keyboard. Exactly one of the fields other than text, icon_custom_emoji_id, and style must be used to specify the type of the button.
  *
  * @package TelegramBot\Api\Types
  */
@@ -30,6 +31,8 @@ class InlineKeyboardButton extends BaseType implements TypeInterface
      */
     protected static $map = [
         'text' => true,
+        'icon_custom_emoji_id' => true,
+        'style' => true,
         'url' => true,
         'callback_data' => true,
         'web_app' => WebAppInfo::class,
@@ -37,6 +40,7 @@ class InlineKeyboardButton extends BaseType implements TypeInterface
         'switch_inline_query' => true,
         'switch_inline_query_current_chat' => true,
         'switch_inline_query_chosen_chat' => SwitchInlineQueryChosenChat::class,
+        'copy_text' => CopyTextButton::class,
         'callback_game' => CallbackGame::class,
         'pay' => true,
     ];
@@ -47,6 +51,20 @@ class InlineKeyboardButton extends BaseType implements TypeInterface
      * @var string
      */
     protected $text;
+
+    /**
+     * Optional. Unique identifier of the custom emoji shown before the text of the button. Can only be used by bots that purchased additional usernames on Fragment or in the messages directly sent by the bot to private, group and supergroup chats if the owner of the bot has a Telegram Premium subscription.
+     *
+     * @var string|null
+     */
+    protected $iconCustomEmojiId;
+
+    /**
+     * Optional. Style of the button. Must be one of "danger" (red), "success" (green) or "primary" (blue). If omitted, then an app-specific style is used.
+     *
+     * @var string|null
+     */
+    protected $style;
 
     /**
      * Optional. HTTP or tg:// URL to be opened when the button is pressed
@@ -98,6 +116,13 @@ class InlineKeyboardButton extends BaseType implements TypeInterface
     protected $switchInlineQueryChosenChat;
 
     /**
+     * Optional. Description of the button that copies the specified text to the clipboard
+     *
+     * @var CopyTextButton|null
+     */
+    protected $copyText;
+
+    /**
      * Optional. Description of the game that will be launched when the user presses the button
      *
      * @var CallbackGame|null
@@ -126,6 +151,40 @@ class InlineKeyboardButton extends BaseType implements TypeInterface
     public function setText($text)
     {
         $this->text = $text;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIconCustomEmojiId()
+    {
+        return $this->iconCustomEmojiId;
+    }
+
+    /**
+     * @param string|null $iconCustomEmojiId
+     * @return void
+     */
+    public function setIconCustomEmojiId($iconCustomEmojiId)
+    {
+        $this->iconCustomEmojiId = $iconCustomEmojiId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getStyle()
+    {
+        return $this->style;
+    }
+
+    /**
+     * @param string|null $style
+     * @return void
+     */
+    public function setStyle($style)
+    {
+        $this->style = $style;
     }
 
     /**
@@ -245,6 +304,23 @@ class InlineKeyboardButton extends BaseType implements TypeInterface
     public function setSwitchInlineQueryChosenChat($switchInlineQueryChosenChat)
     {
         $this->switchInlineQueryChosenChat = $switchInlineQueryChosenChat;
+    }
+
+    /**
+     * @return CopyTextButton|null
+     */
+    public function getCopyText()
+    {
+        return $this->copyText;
+    }
+
+    /**
+     * @param CopyTextButton|null $copyText
+     * @return void
+     */
+    public function setCopyText($copyText)
+    {
+        $this->copyText = $copyText;
     }
 
     /**
